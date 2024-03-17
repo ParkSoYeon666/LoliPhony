@@ -13,7 +13,7 @@
         <ul>
       <li>인공어
         <ul>
-          <li>드라비다한국어족 가설 비판문</li>
+          <a href="#bottom">소연어 사전</a>
         </ul>
       </li>
     </ul>
@@ -66,43 +66,10 @@
     </ul>
   </li>
   </ul>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xsnM6LO0iQk" frameborder="0" allowfullscreen></iframe>
+    <footer id="bottom">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/xsnM6LO0iQk" frameborder="0" allowfullscreen></iframe>
     <button id="recordButton">녹음 시작</button>
     <button id="stopButton" disabled>녹음 정지</button>
-    <div id="recordingsList"></div>
-    <script>
-        let audioChunks = [];
-        let mediaRecorder;
-        const startRecording = () => {
-            audioChunks = [];
-            const constraints = { audio: true };
-            navigator.mediaDevices.getUserMedia(constraints)
-                .then(stream => {
-                    mediaRecorder = new MediaRecorder(stream);
-                    mediaRecorder.ondataavailable = e => {
-                        audioChunks.push(e.data);
-                    };
-                    mediaRecorder.onstop = () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                        const audioUrl = URL.createObjectURL(audioBlob);
-                        const audio = new Audio(audioUrl);
-                        const recordingsList = document.getElementById('recordingsList');
-                        const audioElement = document.createElement('p');
-                        audioElement.innerHTML = `<audio controls src="${audioUrl}"></audio>`;
-                        recordingsList.appendChild(audioElement);
-                    };
-                    mediaRecorder.start();
-                    document.getElementById('recordButton').disabled = true;
-                    document.getElementById('stopButton').disabled = true;
-                })
-                .catch(console.error);
-        };
-        const stopRecording = () => {
-            mediaRecorder.stop();
-            document.getElementById('recordButton').disabled = true;
-            document.getElementById('stopButton').disabled = true;
-        };
-        document.getElementById('recordButton').addEventListener('click', startRecording);
-        document.getElementById('stopButton').addEventListener('click', stopRecording);
+    </footer>
 </body>
 </html>
