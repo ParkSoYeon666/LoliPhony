@@ -33,7 +33,7 @@
               <li>가야 연방국</li>
             </ul>
           </li>
-          <li>후삼국 시대
+          <li>삼국 시대
             <ul>
               <li>태봉 왕국</li>
               <li>후백제 왕국</li>
@@ -68,11 +68,9 @@
     <button id="recordButton">녹음 시작</button>
     <button id="stopButton" disabled>녹음 정지</button>
     <div id="recordingsList"></div>
-
     <script>
         let audioChunks = [];
         let mediaRecorder;
-
         const startRecording = () => {
             audioChunks = [];
             const constraints = { audio: true };
@@ -91,20 +89,17 @@
                         audioElement.innerHTML = `<audio controls src="${audioUrl}"></audio>`;
                         recordingsList.appendChild(audioElement);
                     };
-
                     mediaRecorder.start();
                     document.getElementById('recordButton').disabled = true;
-                    document.getElementById('stopButton').disabled = false;
+                    document.getElementById('stopButton').disabled = true;
                 })
                 .catch(console.error);
         };
-
         const stopRecording = () => {
             mediaRecorder.stop();
             document.getElementById('recordButton').disabled = true;
             document.getElementById('stopButton').disabled = true;
         };
-
         document.getElementById('recordButton').addEventListener('click', startRecording);
         document.getElementById('stopButton').addEventListener('click', stopRecording);
 </body>
